@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from app.views import all_user, login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('allUser/', all_user, name='all_user'),
+    path('login/<slug:username>/<slug:mdp>', login, name='login')
 ]
