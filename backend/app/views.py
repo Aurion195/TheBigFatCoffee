@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpRequest, JsonResponse
 from django.core.serializers import serialize
@@ -11,13 +12,11 @@ def all_user(request):
       
         return JsonResponse(response, safe=False)
 
-def login(request, *args, **kwargs):
-        identifiant = kwargs.get('username')
-        mdp = kwargs.get('mdp')
-        user = authenticate(username=identifiant, password=mdp)
-        
+#Fonction permettant à l'utilisateur de se connecter et de se loger
+def login_user(request):
+        user = authenticate(username=request.POST["username"], password=request.POST["mdp"])
         if user is not None:
                 responseJson = {"connected":"True"}
                 return JsonResponse(responseJson, safe=False)
         else:
-                return JsonResponse(False, safe=False)
+                return JsonResponse({"connected":"False"}, safe=False)
