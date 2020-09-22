@@ -43,14 +43,10 @@ def login_user(request):
                 JsonResponse : la réponse en JSON de la fonction
         """
         user = authenticate(username=request.POST["username"], password=request.POST["mdp"])
-        print(request.POST["username"])
-        print(request.POST["mdp"])
         if user is not None:
-                print("coucou")
                 responseJson = {"connected":"True"}
                 return JsonResponse(responseJson, safe=False)
         else:
-                print("nooooooooo")
                 return JsonResponse({"connected":"False"}, safe=False)
 
 def change_password(request):
@@ -64,12 +60,14 @@ def change_password(request):
                 JsonResponse : la réponse en JSON de la fonction
         """
         identifiant = request.POST["username"]
-        newPassword = request.POST["mdp"]
+        oldPassword = request.POST["mdp"]
+        newPassword = request.POST["newMdp"]
         
-        user = User.objects.get[identifiant]
+        user = User.objects.get(username=identifiant)
         
         if user is not None:
                 user.set_password(newPassword)
+                user.save()
                 return JsonResponse({"statut" : "OK"})
         else:
                 return JsonResponse({"statut" : "KO"})
