@@ -53,7 +53,59 @@ const useStyles = makeStyles((theme) => ({
 * @summary SignUP component that is use at the SignUp page to register to the website 
 * @return {HTML}  HTMl content with SignUp inputs
 */
+function RegistrationForm(props) {
+  const [state, setState] = useState({
+      firstName: "",
+      lastName:"",
+      email:"",
+      password: ""
+  })
+  const handleChange = (e) => {
+      const { id, value } = e.target
+      setState(prevState => ({
+          ...prevState,
+          [id]: value
+      }))
+  }
+  const handleSubmitClick = (e) => {
+      e.preventDefault();
 
+      sendDetailsToServer()
+
+  }
+  /** 
+* @summary Send details to server
+*/
+const sendDetailsToServer = () => {
+  if (state.email.length && state.password.length) {
+      //props.showError(null);
+      const payload = {
+          "firstname": state.firstName,
+          "lastname": state.lastName,
+          "email": state.email,
+          "password": state.password,
+      }
+      axios.post('http://localhost:3000/register', payload)
+          .then(function(response) {
+              if (response.status === 200) {
+                  setState(prevState => ({
+                          ...prevState,
+                          'successMessage': 'Registration successful. Redirecting to home page..'
+                      }))
+                      //redirectToHome();
+                  console.log('Registration successful')
+              } else {
+                  console.log("Some error ocurred");
+              }
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+  } else {
+      console.log('Please enter valid username and password')
+  }
+
+}
 export default function SignUp() {
   const classes = useStyles();
 
@@ -67,7 +119,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form method="POST" role="form" className={classes.form} noValidate>
+        <form  role="form" className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
