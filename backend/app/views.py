@@ -32,15 +32,14 @@ def all_user(request):
 
 def login_user(request):
         """
-        Fonction permettant de savoir si l'utilisateur peut se connecter,
-        la fonction va vérifier que l'individu est inscrit dans la BDD et s'il
-        y est il peut se connecter sinon il reste sur l'écran d'acceuil
+        Check if user can connect on database, function chek if user is register
+        on database.
         
         Args:
-                request ([type]): requête Http
+                request ([type]): Http request
 
         Returns:
-                JsonResponse : la réponse en JSON de la fonction
+                JsonResponse : JSON response like {'connected' : 'True'}
         """
         user = authenticate(username=request.POST["username"], password=request.POST["mdp"])
         if user is not None:
@@ -51,13 +50,13 @@ def login_user(request):
 
 def change_password(request):
         """
-        Fonction permettant de changer le mot de passe pour l'utilisateur
+        Function who permit a one user to change his password
 
         Args:
-                request ([type]): requête Http
+                request ([type]): Http request
 
         Returns:
-                JsonResponse : la réponse en JSON de la fonction
+                JsonResponse : JSON response like {'statut' : 'OK', 'motif' : 'exemple motif'}
         """
         identifiant = request.POST["username"]
         oldPassword = request.POST["mdp"]
@@ -74,14 +73,13 @@ def change_password(request):
 
 def register(request):
         """
-        Fonction permettant d'ajouter un utilisateur dans la base de données, en vérifiant
-        s'il n'existe
+        Register an user in database if he doesn't exist
 
         Args:
-                request ([type]): requête Http
+                request ([type]): Http request
         
         Returns:
-                JsonResponse : la réponse en JSON de la fonction
+                JsonResponse : JSON response {'statut' : 'OK', 'motif' : 'exemple motif'}
         """
         username = request.POST["username"]
         mdp = request.POST["mdp"]

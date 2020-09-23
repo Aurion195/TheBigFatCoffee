@@ -2,9 +2,7 @@
 	@author = MATHIEU Thomas
 	@author = GARCIA Jérémy
 	
-	Cette page permet de créer et de gérer les différentes routes
-	qui seront présent tout du lonf de cette API, permet de les identifier
-	et de créer les fonctions qui seront appellé quand on fait appel à cette URL
+	Create and manage differentes routes for the API.
 
 	ex : 
 		path('url d'appel', 'nom fonction', name = 'nom de la fonction')

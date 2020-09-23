@@ -1,11 +1,3 @@
-"""
-        Page d'options de Django pour le côté back.
-    
-        Permet d'ajouter des modules, de gérer les templates qu'on choisit de sélectionner,
-        de supprimer des modules, gérer les différentes base de données que l'on souhaite
-        utiliser et sans oublier la gestion des middlewares
-"""
-
 import sys
 from pathlib import Path
 

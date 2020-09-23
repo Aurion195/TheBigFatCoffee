@@ -20,8 +20,7 @@ import unittest
 class TestUnitaireUser(TestCase):
         def testRegister(self):
                 """
-                Fonction permettant de tester le register et enregistrer une personne dans la
-                base de données
+                Test register user if he doesn't exist in database
                 """
                 data = {"username": "legrosgarcia", 
                         "mail" : "tamerelapute@jetebaise.com",
@@ -35,7 +34,7 @@ class TestUnitaireUser(TestCase):
                 
         def testLoginUser(self):
                 """
-                Fonction permmetant de tester la fonction login et son bon fonctionneent
+                Test login function
                 """
                 data = {"username":"legrosgarcia", "mdp":"charly2020"}
                 r = requests.post("http://localhost:8000/login_user",  data = data)
@@ -44,7 +43,7 @@ class TestUnitaireUser(TestCase):
 
         def testChangePassword(self):
                 """
-                Fonction permettant de tester le changement du mot de passe pour un utilisateur
+                Test change password user
                 """
                 data = {"username":"legrosgarcia", "mdp":"lucien2020", "newMdp" : "charly2020"}
                 r = requests.post("http://localhost:8000/change_password", data = data)
