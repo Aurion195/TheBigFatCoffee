@@ -1,20 +1,20 @@
 """
 	@author = MATHIEU Thomas
-    	@author = GARCIA Jérémy
+	@author = GARCIA Jérémy
 	
-    	Cette page permet de créer et de gérer les différentes routes
-    	qui seront présent tout du lonf de cette API, permet de les identifier
-    	et de créer les fonctions qui seront appellé quand on fait appel à cette URL
-    
-    	ex : 
+	Create and manage differentes routes for the API.
+
+	ex : 
 		path('url d'appel', 'nom fonction', name = 'nom de la fonction')
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import all_user, login_user
+from app.views import all_user, login_user, change_password, register
 
 urlpatterns = [
-    	path('admin/', admin.site.urls),
-    	path('allUser/', all_user, name='all_user'),
-    	path('login_user', login_user, name='login_user')
+	path('admin/', admin.site.urls),
+	path('allUser/', all_user, name='all_user'),
+	path('login_user', login_user, name='login_user'),
+	path('change_password', change_password, name='change_password'),
+	path('register', register, name='register')
 ]

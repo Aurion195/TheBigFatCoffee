@@ -1,9 +1,8 @@
 """
     @author = MATHIEU Thomas
     @author = GARCIA Jérémy
-        
-    Cette page permet d'inscrire nos models que l'on va créer dans la base de données de  
-    django
+    
+    This page permit subscrive own models who can create in django database
 """
 
 from django.contrib import admin
