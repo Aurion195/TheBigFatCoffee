@@ -65,7 +65,7 @@ function RegistrationForm(props) {
         if (state.email.length && state.password.length) {
             //props.showError(null);
             const payload = {
-                "email": state.email,
+                "username": state.email,
                 "password": state.password,
             }
             axios.post('http://localhost:3000/login_user', payload)
@@ -76,7 +76,7 @@ function RegistrationForm(props) {
                                 'successMessage': 'Registration successful. Redirecting to home page..'
                             }))
                             //redirectToHome();
-                        console.log(null)
+                        console.log('Registration successful')
                     } else {
                         console.log("Some error ocurred");
                     }

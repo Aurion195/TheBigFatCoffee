@@ -41,7 +41,8 @@ def login_user(request):
         Returns:
                 JsonResponse : JSON response like {'connected' : 'True'}
         """
-        user = authenticate(username=request.POST["username"], password=request.POST["mdp"])
+
+        user = authenticate(username=request.POST.get("username"), password=request.POST.get("mdp"))
         if user is not None:
                 responseJson = {"connected":"True"}
                 return JsonResponse(responseJson, safe=False)
