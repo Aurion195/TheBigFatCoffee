@@ -12,7 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import { useState } from 'react';
+import { PropTypes } from 'react'
+import axios from 'axios';
 /**
 * @summary Function that add Copyright
 * @return {HTML} Returning html code with Copyright content.
@@ -55,8 +57,8 @@ const useStyles = makeStyles((theme) => ({
 */
 function RegistrationForm(props) {
   const [state, setState] = useState({
-      firstName: "",
-      lastName:"",
+      firstname: "",
+      lastname:"",
       email:"",
       password: ""
   })
@@ -69,7 +71,7 @@ function RegistrationForm(props) {
   }
   const handleSubmitClick = (e) => {
       e.preventDefault();
-
+      
       sendDetailsToServer()
 
   }
@@ -77,11 +79,12 @@ function RegistrationForm(props) {
 * @summary Send details to server
 */
 const sendDetailsToServer = () => {
-  if (state.email.length && state.password.length) {
+  if (state.email.length &&  state.firstname.length&& state.lastname.length) {
       //props.showError(null);
+      console.log("nfiefozfe")
       const payload = {
-          "firstname": state.firstName,
-          "lastname": state.lastName,
+          "firstname": state.firstname,
+          "lastname": state.lastname,
           "email": state.email,
           "password": state.password,
       }
@@ -106,7 +109,7 @@ const sendDetailsToServer = () => {
   }
 
 }
-export default function SignUp() {
+
   const classes = useStyles();
 
   return (
@@ -124,12 +127,14 @@ export default function SignUp() {
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                name="firstName"
+                name="firstname"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="firstname"
                 label="First Name"
+                value = { state.firstname }
+                onChange = { handleChange }
                 autoFocus
               />
             </Grid>
@@ -138,10 +143,12 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
+                id="lastname"
                 label="Last Name"
-                name="lastName"
+                name="lastname"
                 autoComplete="lname"
+                value = { state.lastname }
+                onChange = { handleChange }
               />
             </Grid>
             <Grid item xs={12}>
@@ -153,6 +160,8 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value = { state.email }
+              onChange = { handleChange }
               />
             </Grid>
             <Grid item xs={12}>
@@ -164,6 +173,8 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                value = { state.password }
+        onChange = { handleChange }
                 autoComplete="current-password"
               />
             </Grid>
@@ -180,7 +191,9 @@ export default function SignUp() {
             fullWidth
             variant="contained"
             color="primary"
+            
             className={classes.submit}
+            onClick = { handleSubmitClick } 
           >
             Sign Up
           </Button>
@@ -198,4 +211,7 @@ export default function SignUp() {
       </Box>
     </Container>
   );
-}
+
+    }
+export default RegistrationForm
+
