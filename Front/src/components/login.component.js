@@ -68,7 +68,7 @@ function RegistrationForm(props) {
                 "email": state.email,
                 "password": state.password,
             }
-            axios.post('http://localhost:8000/login_user', payload)
+            axios.post('http://localhost:3000/login_user', payload)
                 .then(function(response) {
                     if (response.status === 200) {
                         setState(prevState => ({
