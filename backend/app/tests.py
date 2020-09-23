@@ -37,7 +37,17 @@ class TestUnitaireUser(TestCase):
                 """
                 Fonction permmetant de tester la fonction login et son bon fonctionneent
                 """
-                data = {"username":"legrosgarcia", "mdp":"lucien2020"}
+                data = {"username":"legrosgarcia", "mdp":"charly2020"}
                 r = requests.post("http://localhost:8000/login_user",  data = data)
                 expectResponseJson = {"connected":"True"}
                 self.assertEqual(expectResponseJson, r.json())
+
+        def testChangePassword(self):
+                """
+                Fonction permettant de tester le changement du mot de passe pour un utilisateur
+                """
+                data = {"username":"legrosgarcia", "mdp":"lucien2020", "newMdp" : "charly2020"}
+                r = requests.post("http://localhost:8000/change_password", data = data)
+                user = User.objects.get(username="legrosgarcia")
+                self.assertIsNotNone(user)
+                self.assertTrue(user.check_password("charly2020"))
