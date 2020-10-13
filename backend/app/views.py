@@ -39,15 +39,18 @@ def login_user(request):
                 request ([type]): Http request
 
         Returns:
-                JsonResponse : JSON response like {'connected' : 'True'}
+                JsonResponse : JSON response like {'statut' : 'OK'}
         """
-
-        user = authenticate(username=request.POST.get("username"), password=request.POST.get("mdp"))
+        form_data = json.loads(request.body.decode())
+        user = authenticate(username=form_data["username"], password=form_data["password"])
+        
         if user is not None:
-                responseJson = {"connected":"True"}
+                print("connecté")
+                responseJson = {"statut":"OK"}
                 return JsonResponse(responseJson, safe=False)
         else:
-                return JsonResponse({"connected":"False"}, safe=False)
+                print("zob")
+                return JsonResponse({"statut":"KO"}, safe=False)
 
 def change_password(request):
         """
@@ -82,15 +85,16 @@ def register(request):
         Returns:
                 JsonResponse : JSON response {'statut' : 'OK', 'motif' : 'exemple motif'}
         """
-        username = request.POST["username"]
-        mdp = request.POST["mdp"]
-        mail = request.POST["mail"]
-        firstname = request.POST["firstname"]
-        lastname = request.POST["lastname"]
         
+        form_data = json.loads(request.body.decode())
+        username = form_data["email"]
+        mdp = form_data["password"]
+        mail = form_data["email"]
+        firstname = form_data["firstname"]
+        lastname = form_data["lastname"]
+
         try:
-                userAlreadyExist = User.objects.get(username=username)
-                
+                userAlreadyExist = User.objects.get(username=mail)
                 return JsonResponse({'statut' : 'KO', 'motif' : 'utilisateur existant'})
         except ObjectDoesNotExist :
                 user = User.objects.create_user(username=username, email= mail, 
