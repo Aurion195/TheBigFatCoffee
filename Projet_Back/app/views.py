@@ -45,12 +45,10 @@ def login_user(request):
         user = authenticate(username=form_data["username"], password=form_data["password"])
         
         if user is not None:
-                print("connecté")
                 responseJson = {"statut":"OK"}
-                return JsonResponse(responseJson, safe=False)
+                return JsonResponse(responseJson, safe=False, mimetype='application/json')
         else:
-                print("zob")
-                return JsonResponse({"statut":"KO"}, safe=False)
+                return JsonResponse({"statut":"KO"}, safe=False, mimetype='application/json')
 
 def change_password(request):
         """

@@ -3,3 +3,5 @@ backend/app/__pycache__/*
 backend/app/migrations/__pycache__/*
 backend/backend/__pycache__/*
 Front/node_modules/*
+Front/debug.log
+.vscode
