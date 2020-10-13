@@ -14,7 +14,7 @@ import BathtubOutlinedIcon from '@material-ui/icons/BathtubOutlined';
 import React, { useState } from 'react';
 import { PropTypes } from 'react'
 import axios from 'axios';
-
+import { Redirect } from 'react-router-dom'
 
 /**
  * @summary Styling component should be in css in future work..
@@ -75,7 +75,9 @@ function RegistrationForm(props) {
                                 ...prevState,
                                 'successMessage': 'Registration successful. Redirecting to home page..'
                             }))
-                            //redirectToHome();
+                           
+
+
                         console.log('Registration successful')
                     } else {
                         console.log("Some error ocurred");
