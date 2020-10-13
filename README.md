@@ -1,3 +1,4 @@
 # TheBigFatCoffee
-# Author : GARCIA Jérémy
-#          MATHIEU Thomas
+
+Author : GARCIA Jérémy \n
+         MATHIEU Thomas
