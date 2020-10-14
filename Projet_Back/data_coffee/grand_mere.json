@@ -1,0 +1,97 @@
+[
+    {
+        "annee" : 2020,
+        "mois": [
+            {
+                "janvier" : 1.39 ,
+                "fevrier" : 1.47,
+                "mars" : 1.48,
+                "avril" : 1.42,
+                "mai" : 1.50,
+                "juin" : 1.32,
+                "juiellet" : 1.60,
+                "aout" : 1.65,
+                "septembre" : 1.55,
+                "octobre" : 1.50,
+                "novembre" : 1.45,
+                "decembre" : 1.21
+            }
+        ]
+    },
+    {
+        "annee" : 2019,
+        "mois": [
+            {
+                "janvier" : 0.90 ,
+                "fevrier" : 0.85,
+                "mars" : 1.02,
+                "avril" : 1.05,
+                "mai" : 0.98,
+                "juin" : 1.02,
+                "juiellet" : 1.04,
+                "aout" : 1.08,
+                "septembre" : 1.15,
+                "octobre" : 1.20,
+                "novembre" : 1.21,
+                "decembre" : 1.26
+            }
+        ]
+    },
+    {
+        "annee" : 2018,
+        "mois": [
+            {
+                "janvier" : 1.63 ,
+                "fevrier" : 1.52,
+                "mars" : 1.65,
+                "avril" : 1.85,
+                "mai" : 2.00,
+                "juin" : 2.02,
+                "juiellet" : 2.05,
+                "aout" : 2.00,
+                "septembre" : 1.72,
+                "octobre" : 1.65,
+                "novembre" : 1.24,
+                "decembre" : 1.20
+            }
+        ]
+    },
+    {
+        "annee" : 2017,
+        "mois": [
+            {
+                "janvier" : 1.46 ,
+                "fevrier" : 1.45,
+                "mars" : 1.35,
+                "avril" : 1.27,
+                "mai" : 1.25,
+                "juin" : 1.28,
+                "juiellet" : 1.32,
+                "aout" : 1.23,
+                "septembre" : 1.18,
+                "octobre" : 1.14,
+                "novembre" : 1.19,
+                "decembre" : 1.15
+            }
+        ]
+    },
+    {
+        "annee" : 2016,
+        "mois": [
+            {
+                "janvier" : 1.27 ,
+                "fevrier" : 1.29,
+                "mars" : 1.28,
+                "avril" : 1.30,
+                "mai" : 1.25,
+                "juin" : 1.20,
+                "juiellet" : 1.16,
+                "aout" : 1.10,
+                "septembre" : 1.16,
+                "octobre" : 1.21,
+                "novembre" : 1.24,
+                "decembre" : 1.20
+            }
+        ]
+    }
+]
