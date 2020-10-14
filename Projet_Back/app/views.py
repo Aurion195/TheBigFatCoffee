@@ -42,14 +42,17 @@ def login_user(request):
                 JsonResponse : JSON response like {'statut' : 'OK'}
         """
         form_data = json.loads(request.body.decode())
-        user = authenticate(username=form_data["username"], password=form_data["password"])
 
         #Si l'utilisateur est dans la base de données on va le connecté
-        if user is not None:
-                login(request, user)
-                responseJson = {"statut":"OK"}
-                return JsonResponse(responseJson, safe=False, status=200)
-        else:
+        try :
+                user = authenticate(username=form_data["username"], password=form_data["password"])
+                
+                if user is not None:
+                        responseJson = {"statut":"OK"}
+                        return JsonResponse(responseJson, safe=False, status=200)
+                else:
+                        raise ObjectDoesNotExist
+        except ObjectDoesNotExist:
                 return JsonResponse({"statut":"KO"}, safe=False, status=204)
 
 def change_password(request):
