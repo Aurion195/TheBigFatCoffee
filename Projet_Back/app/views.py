@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpRequest, JsonResponse
 from django.core.serializers import serialize
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 import json
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -43,12 +43,14 @@ def login_user(request):
         """
         form_data = json.loads(request.body.decode())
         user = authenticate(username=form_data["username"], password=form_data["password"])
-        
+
+        #Si l'utilisateur est dans la base de données on va le connecté
         if user is not None:
+                login(request, user)
                 responseJson = {"statut":"OK"}
-                return JsonResponse(responseJson, safe=False, mimetype='application/json')
+                return JsonResponse(responseJson, safe=False, status=200)
         else:
-                return JsonResponse({"statut":"KO"}, safe=False, mimetype='application/json')
+                return JsonResponse({"statut":"KO"}, safe=False, status=204)
 
 def change_password(request):
         """
@@ -60,18 +62,19 @@ def change_password(request):
         Returns:
                 JsonResponse : JSON response like {'statut' : 'OK', 'motif' : 'exemple motif'}
         """
-        identifiant = request.POST["username"]
-        oldPassword = request.POST["mdp"]
-        newPassword = request.POST["newMdp"]
-        
+        form_data = json.loads(request.body.decode())
+        identifiant = form_data["username"]
+        oldPassword = form_data["mdp"]
+        newPassword = form_data["newMdp"]
+
         user = User.objects.get(username=identifiant)
         
         if user is not None:
                 user.set_password(newPassword)
                 user.save()
-                return JsonResponse({"statut" : "OK"})
+                return JsonResponse({"statut" : "OK"}, status=200)
         else:
-                return JsonResponse({"statut" : "KO"})
+                return JsonResponse({"statut" : "KO"}, status=204)
 
 def register(request):
         """
@@ -93,10 +96,23 @@ def register(request):
 
         try:
                 userAlreadyExist = User.objects.get(username=mail)
-                return JsonResponse({'statut' : 'KO', 'motif' : 'utilisateur existant'})
+                return JsonResponse({'statut' : 'KO', 'motif' : 'utilisateur existant'}, status=203)
         except ObjectDoesNotExist :
                 user = User.objects.create_user(username=username, email= mail, 
                                                 password=mdp, first_name= firstname,
                                                 last_name=lastname)
                 user.save()
-                return JsonResponse({'statut' : 'OK', 'motif' : 'utilisateur cree'})
+                return JsonResponse({'statut' : 'OK', 'motif' : 'utilisateur cree'}, status=200)
+
+def logout(request):
+        """
+        Logout an user if he is previously login
+
+        Args:
+             request ([type]): Http request
+
+        Returns:
+                None   
+        """
+        logout(request)
+        return JsonResponse({'statut' : 'OK', 'motif' : 'utilisateur deconnecter'}, status=200)
