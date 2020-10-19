@@ -11,6 +11,9 @@ from django.core.serializers import serialize
 from django.contrib.auth import authenticate, login, logout
 import json
 from django.core.exceptions import ObjectDoesNotExist
+import matplotlib.pyplot as plt
+import numpy as np
+import base64
 
 def all_user(request):        
         """
@@ -119,3 +122,10 @@ def logout(request):
         """
         logout(request)
         return JsonResponse({'statut' : 'OK', 'motif' : 'utilisateur deconnecter'}, status=200)
+
+def chart_coffee(request):
+        f = open("data_coffee/coffe.json")
+
+        data = json.load(f)
+
+        return JsonResponse(data, safe=False, status=200)
