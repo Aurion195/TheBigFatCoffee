@@ -7,3 +7,5 @@ Front/debug.log
 .vscode
 Projet_Back/db.sqlite3
 Projet_Back/Pipfile
+Projet_Back/app/__pycache__
+Projet_Back/library_project/__pycache__
