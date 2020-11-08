@@ -11,8 +11,6 @@ from django.core.serializers import serialize
 from django.contrib.auth import authenticate, login, logout
 import json
 from django.core.exceptions import ObjectDoesNotExist
-import matplotlib.pyplot as plt
-import numpy as np
 import base64
 
 def all_user(request):        
@@ -118,14 +116,47 @@ def logout(request):
              request ([type]): Http request
 
         Returns:
-                None   
+                JsonResponse : JSON Response ()   
         """
         logout(request)
         return JsonResponse({'statut' : 'OK', 'motif' : 'utilisateur deconnecter'}, status=200)
 
 def chart_coffee(request):
+        """
+        Send details to JSON Coffee to front-end 
+
+        Args:
+                request ([type]): Http request
+        
+        Returns:
+                JsonResponse : JSON with data-coffee
+        """
         f = open("data_coffee/coffe.json")
 
         data = json.load(f)
 
         return JsonResponse(data, safe=False, status=200)
+
+def chart_coffee_details(reques, slug):
+        """
+        This function permit to send differents data in front, with the 
+        parameter slug
+
+        Args:
+                request ([type]): Http request
+                slug ([str]): Name of the coffee supplier
+        
+        Returns:
+                JsonResponse : JSON with data-coffee / JSON error
+        """
+
+        try :
+                f = open("data_coffee/"+slug+".json")
+
+                data = json.load(f)
+
+                return JsonResponse(data, safe=False, status=200)
+        except Exception :
+                data = {"Statut":"KO", "Response":"Vous n'avez pas rentré le bon nom"}
+
+                return JsonResponse(data, safe=False, status=204)
