@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 import json
 from django.core.exceptions import ObjectDoesNotExist
 import base64
+from .models import PorteFeuille
 
 def all_user(request):        
         """
@@ -29,7 +30,6 @@ def all_user(request):
         response = json.loads(serialize('json', data))
 
         return JsonResponse(response, safe=False)
-
 
 def login_user(request):
         """
@@ -106,7 +106,23 @@ def register(request):
                                                 password=mdp, first_name= firstname,
                                                 last_name=lastname)
                 user.save()
+                createPorteFeuille(username, first_name, last_name)
                 return JsonResponse({'statut' : 'OK', 'motif' : 'utilisateur cree'}, status=200)
+
+def createPorteFeuille(username, first_name, last_name):
+        """
+        Add a wallet for a users, when one new users register in site
+
+        Args:
+                username([char]) = primary key, username of the portefeuille's people
+                first_name([char]) = first_name of the users
+                last_name([char]) = last_name of the users        
+        Returns:
+                void function
+        """
+        porteFeuille = PorteFeuille.objects.create(username=username, first_name=firstname, last_name=lastname,
+                                                           nombre_action=0, valeur=0)
+        porteFeuille.save()
 
 def logout(request):
         """
@@ -154,9 +170,61 @@ def chart_coffee_details(reques, slug):
                 f = open("data_coffee/"+slug+".json")
 
                 data = json.load(f)
-
                 return JsonResponse(data, safe=False, status=200)
         except Exception :
                 data = {"Statut":"KO", "Response":"Vous n'avez pas rentré le bon nom"}
 
                 return JsonResponse(data, safe=False, status=204)
+
+def addMoney(request):
+        """
+        Add a money in wallet User
+
+        Args:
+                request ([type]): Http request
+        
+        Returns:
+                JsonResponse : JSON response {'statut' : 'OK', 'motif' : 'exemple motif'}
+        """
+        try :
+                form_data = json.loads(request.body.decode())
+                username = form_data["username"]
+                money = form_data["money"]
+
+                wallet = PorteFeuille.objects.get(username=username)
+                wallet.valeur = money
+                wallet.save()
+
+                return JsonResponse({"statut" : "OK", "motif" : "Votre porte-monnaie à été crédité"}, status=200)
+        except ObjectDoesNotExist :
+                return JsonResponse({"statut" : "KO", "motif" : "Vous n'êtes pas connecté ou vous n'avez pas de portefeuille"}, status=204)
+
+def withdrawalMoney(request):
+        """
+                Less a money in wallet User (via paypal)
+
+        Args:
+                request ([type]): Http request
+        
+        Returns:
+                JsonResponse : JSON response {'statut' : 'OK', 'motif' : 'exemple motif'}
+        """
+
+        try :
+                form_data = json.loads(request.body.decode())
+                username = form_data["username"]
+                money = form_data["money"]
+
+                wallet = PorteFeuille.objects.get(username=username)
+                moneyWallet = wallet.valeur
+
+                if (moneyWallet - money < 0) :
+                        return JsonResponse({"statut" : "KO", "motif" : "Vous n'avez pas assé de fond"}, status=202)
+                else:
+                        wallet.valeur = moneyWallet - money
+                        wallet.save()
+
+                        return JsonResponse({"statut" : "OK", "motif" : "Vous porte-monnaie à été débité"}, status=200)
+
+        except ObjectDoesNotExist :
+                return JsonResponse({"statut" : "KO", "motif" : "Vous n'êtes pas connecté ou vous n'avez pas de portefeuille"}, status=204)
