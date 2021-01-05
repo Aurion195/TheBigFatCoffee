@@ -106,10 +106,10 @@ def register(request):
                                                 password=mdp, first_name= firstname,
                                                 last_name=lastname)
                 user.save()
-                createPorteFeuille(username, first_name, last_name)
+                createPorteFeuille(username, firstname, lastname)
                 return JsonResponse({'statut' : 'OK', 'motif' : 'utilisateur cree'}, status=200)
 
-def createPorteFeuille(username, first_name, last_name):
+def createPorteFeuille(username, firstname, lastname):
         """
         Add a wallet for a users, when one new users register in site
 
@@ -228,3 +228,24 @@ def withdrawalMoney(request):
 
         except ObjectDoesNotExist :
                 return JsonResponse({"statut" : "KO", "motif" : "Vous n'êtes pas connecté ou vous n'avez pas de portefeuille"}, status=204)
+
+def getMoney(request):
+        """    
+                Give the wallet money of the user
+        
+        Args:
+                request ([type]): Http request
+        
+        Returns:
+                JsonResponse : JSON response {'statut' : 'OK', 'valeur' : 35.20}        
+        """
+        try:
+                form_data = json.loads(request.body.decode())
+                username = form_data["username"]
+
+                wallet = PorteFeuille.objects.get(username=username)
+                moneyWallet = wallet.valeur
+
+                return JsonResponse({"statut" : "OK", "valeur" : moneyWallet}, status=200)
+        except ObjectDoesNotExist :
+                return JsonResponse({"statut" : "KO", "valeur" : "0"}, status=204)

@@ -16,6 +16,7 @@ from django.contrib.auth import authenticate
 from app.views import login_user
 import json
 import unittest
+from .models import PorteFeuille
 
 # Create your tests here.
 class TestUnitaireUser(TestCase):
@@ -63,3 +64,55 @@ class TestUnitaireUser(TestCase):
                 user = User.objects.get(username="Tibus")
                 self.assertIsNotNone(user)
                 self.assertTrue(user.check_password("charly2020"))
+        
+        def testGetMoneyInWallet(self):
+                """
+                Test get money in wallet of an user
+                """
+                dataBis = {"username": "tamerelapute@jetebaise.com", 
+                        "email" : "tamerelapute@jetebaise.com",
+                        "password" : "lucien2020",
+                        "firstname" : "Charly",
+                        "lastname" : "Croupier"}
+                data = json.dumps(dataBis)
+                createUser = self.factory.post("http://localhost:8000/register", data = data)
+                r = self.factory.post("http://localhost:8000/getMoney", data=data)
+                self.assertEqual(r.status_code, 200)
+        
+        def testAddMoneyInWallat(self):
+                """
+                Test add monney in wallet
+                """
+                dataUser= {"username": "tamerelapute@jetebaise.com", 
+                        "email" : "tamerelapute@jetebaise.com",
+                        "password" : "lucien2020",
+                        "firstname" : "Charly",
+                        "lastname" : "Croupier"}
+                data = json.dumps(dataUser)
+                createUser = self.factory.post("http://localhost:8000/register", data = data)
+                
+                dataMoney = {"username" : "tamerelapute@jetebaise.com", "money": 25}
+                data = json.dumps(dataMoney)
+                r = self.factory.post("http://localhost:8000/addMoney", data=data)
+                
+                wallet = PorteFeuille.objects.get(username="tamerelapute@jetebaise.com")
+        
+                self.assertEqual(wallet.valeur, 25)
+        
+        def testAddActionWithNoMoney(self):
+                """
+                Test if you can buy action wihout money
+                """
+                dataUser= {"username": "tamerelapute@jetebaise.com", 
+                        "email" : "tamerelapute@jetebaise.com",
+                        "password" : "lucien2020",
+                        "firstname" : "Charly",
+                        "lastname" : "Croupier"}
+                data = json.dumps(dataUser)
+                createUser = self.factory.post("http://localhost:8000/register", data = data)
+                
+                dataMoney = {"username" : "tamerelapute@jetebaise.com", "money": 25}
+                data = json.dumps(dataMoney)
+                r = self.factory.post("http://localhost:8000/withdrawalMoney", data=data)
+                
+                self.assertEqual(r.status_code, 202)

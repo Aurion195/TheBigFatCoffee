@@ -9,7 +9,7 @@
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import all_user, login_user, change_password, register, chart_coffee, chart_coffee_details, addMoney, withdrawalMoney
+from app.views import all_user, login_user, change_password, register, chart_coffee, chart_coffee_details, addMoney, withdrawalMoney, getMoney
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
@@ -21,4 +21,5 @@ urlpatterns = [
 	path('chart_coffee_details/<slug:slug>', chart_coffee_details, name='chart_coffee_details'),
 	path('addMoney', addMoney, name='addMoney'),
 	path('withdrawalMoney', withdrawalMoney, name='withdrawalMoney'),
+	path('getMoney', getMoney, name='getMoney'),
 ]
