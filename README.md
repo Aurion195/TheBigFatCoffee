@@ -19,34 +19,34 @@ Créer un site web en react utilisant un back Django.
 
 - Récupérer le fichier requierement.txt
 - Ouvrir un terminal
-- Ecrire : pip3 install -r requierement.txt
+- Ecrire : _pip3 install -r requierement.txt_
 
 > React
 
--npm install
+- _npm install_
 
 # Lancement du projet
 
 > Django
 
 - Ouvrir un terminal
-- Aller dans le dossier "TheBigFatCoffee/Projet_Back/"
-- Ecrire : python3 manage.py runserver
+- Aller dans le dossier _TheBigFatCoffee/Projet_Back/_
+- Ecrire : _python3 manage.py runserver_
 
 Si vous voullez ajouter des personnes dans la base de données avant de lancer le programme
 
-- python3 manage.py loaddata fixtures/mydata.json
+- _python3 manage.py loaddata fixtures/mydata.json_
 
 Si vous voullez supprimer toutes les données de la base de données
 
-- python3 manage.py flush
+- _python3 manage.py flush_
 
 Si vous voullez lancer les test unitaires de Django
 
-- python3 manage.py test
+- _python3 manage.py test_
 
 > React
 
 - Ouvrir un terminal
-- Aller dans le dossier "TheBigFatCoffee/Front/"
-- Ecrire : npm run start
+- Aller dans le dossier _TheBigFatCoffee/Front/_
+- Ecrire : _npm run start_
