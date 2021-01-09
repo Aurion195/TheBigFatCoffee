@@ -21,6 +21,7 @@ Créer un site web en react utilisant un back Django.
 
 - Récupérer le fichier requierement.txt
 - Ouvrir un terminal
+- Aller dans le répertoire _TheBigFatCoffee/Projet_Back/_
 - Ecrire : _pip3 install -r requierement.txt_
 
 > React

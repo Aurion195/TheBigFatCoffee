@@ -25,17 +25,6 @@
                 }
         },
         {
-                "model" : "app.PorteFeuille",
-                "pk" : 1,
-                "fields" : {
-                        "username" : "mathieuthomas84300@hotmail.fr",
-                        "first_name" : "Thomas",
-                        "last_name" : "Mathieu",
-                        "nombre_action" : 0,
-                        "valeur" : 0
-                }
-        },
-        {
                 "model" : "auth.user",
                 "pk" : 3,
                 "fields" : {
@@ -44,6 +33,17 @@
                         "password" : "pbkdf2_sha256$216000$Q8b0XhWdvRFz$4e6TgCJZO05UcvgUMGb0zm4A/UpG0mikduOC3i+QOZc=",
                         "first_name" : "Jeremy",
                         "last_name" : "Garcia"
+                }
+        },
+        {
+                "model" : "app.PorteFeuille",
+                "pk" : 1,
+                "fields" : {
+                        "username" : "mathieuthomas84300@hotmail.fr",
+                        "first_name" : "Thomas",
+                        "last_name" : "Mathieu",
+                        "nombre_action" : 0,
+                        "valeur" : 0
                 }
         },
         {
