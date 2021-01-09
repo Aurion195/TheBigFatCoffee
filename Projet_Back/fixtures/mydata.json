@@ -1,0 +1,60 @@
+[
+        {
+                "model" : "auth.user",
+                "pk" : 1,
+                "fields" : {
+                        "username" : "admin",
+                        "email" : "mathieuthomas84300@hotmail.fr",
+                        "password" : "pbkdf2_sha256$216000$4UNl4QsHpT2h$IJ+OwEgl2UAjDlldfbZgwoTouCuiMUI7kaC0aFW1E3M=",
+                        "first_name" : "Thomas",
+                        "last_name" : "Mathieu",
+                        "is_superuser": true,
+                        "is_staff": true,
+                        "is_active": true
+                }
+        },
+        {
+                "model" : "auth.user",
+                "pk" : 2,
+                "fields" : {
+                        "username" : "mathieuthomas84300@hotmail.fr",
+                        "email" : "mathieuthomas84300@hotmail.fr",
+                        "password" : "pbkdf2_sha256$216000$KRslxKAMEXS3$N4xmnyU4q6M4PbdVfUB84g4jdRF0EO0ldEY4MtYWslc=",
+                        "first_name" : "Thomas",
+                        "last_name" : "Mathieu"
+                }
+        },
+        {
+                "model" : "app.PorteFeuille",
+                "pk" : 1,
+                "fields" : {
+                        "username" : "mathieuthomas84300@hotmail.fr",
+                        "first_name" : "Thomas",
+                        "last_name" : "Mathieu",
+                        "nombre_action" : 0,
+                        "valeur" : 0
+                }
+        },
+        {
+                "model" : "auth.user",
+                "pk" : 3,
+                "fields" : {
+                        "username" : "jeremy.garcia@hotmail.fr",
+                        "email" : "jeremy.garcia@hotmail.fr",
+                        "password" : "pbkdf2_sha256$216000$Q8b0XhWdvRFz$4e6TgCJZO05UcvgUMGb0zm4A/UpG0mikduOC3i+QOZc=",
+                        "first_name" : "Jeremy",
+                        "last_name" : "Garcia"
+                }
+        },
+        {
+                "model" : "app.PorteFeuille",
+                "pk" : 2,
+                "fields" : {
+                        "username" : "jeremy.garcia@hotmail.fr",
+                        "first_name" : "Jeremy",
+                        "last_name" : "Garcia",
+                        "nombre_action" : 0,
+                        "valeur" : 0
+                }
+        }
+]
