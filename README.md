@@ -5,7 +5,9 @@ Un site pour acheter et vendre des actions de café
 ## Objectifs
 Créer un site web en react utilisant un back Django.
 > Author : GARCIA Jérémy & MATHIEU Thomas
+
 > Version : 2.20
+
 > Date : 10/01/2021
 
 # Table des matières
