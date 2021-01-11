@@ -1,0 +1,222 @@
+swagger: "2.0"
+info:
+  description: "Permet de découvrir les diférentes routes que l'API peut avoir et faire"
+  version: "1.0.0"
+  title: "Le swagger du gros café"
+  contact:
+    email: "thomas.mathieu@alumni-univ-avignon.fr"
+host: "localhost:8000"
+basePath: "/"
+tags:
+- name: "User"
+  description: "A propos de tous les utilisateurs"
+schemes:
+- "http"
+paths:
+  /allUser/:
+    get:
+      tags:
+      - "User"
+      summary: "Filtre tous les utilisateurs"
+      description: "Affiche tous les utilisateurs"
+      operationId: "allUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "retourne tous les utilisateurs"
+  /login_user:
+    get:
+      tags:
+      - "User"
+      summary: "Login"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "login_user"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "Identifiant"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "Password"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"
+        "204":
+          description: "Pas de compte existant"
+  /change_password:
+    get:
+      tags:
+      - "User"
+      summary: "Change le mot de passe"
+      description: "Change le mot de passe par celui qu'il veut"
+      operationId: "change_password"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "Identifiant"
+        required: true
+        type: "string"
+      - name: "mdp"
+        in: "formData"
+        description: "Password"
+        required: true
+        type: "string"
+      - name: "newMdp"
+        in: "formData"
+        description: "nouveau password"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"
+        "204":
+          description: "Erreur"
+  /register:
+    post:
+      tags:
+      - "User"
+      summary: "Enregistre l'utilisateur"
+      description: "Permet d'enregistrer l'utilisateur dans la base de données lui créée aussi un portemonnaie virtuel"
+      operationId: "register"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: "formData"
+        description: "Identifiant qui sert d'utilisateur et d'email"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "formData"
+        description: "Password"
+        required: true
+        type: "string"
+      - name: "firstname"
+        in: "formData"
+        description: "Prénom de la personne"
+        required: true
+        type: "string"
+      - name: "lastname"
+        in: "formData"
+        description: "Nom de famille de la personne"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"
+        "203":
+          description: "Utilisateur déjà existant"
+  /chart_coffee:
+    get:
+      tags:
+      - "Chart"
+      summary: "Fichier JSON coffee"
+      description: "Retourne le fichier global JSON qui représente tous les prix des actions"
+      operationId: "chart_coffee"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: ""
+  /chart_coffee_details/{slug}:
+    get:
+      tags:
+      - "Chart"
+      summary: "Fichier JSON coffee"
+      description: "Retourne le fichier demandée JSON qui représente tous les prix des actions"
+      operationId: "chart_coffee_details/<slug:slug>"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "slug"
+        in: "path"
+        description: "Nom d'entreprise qui ont un fichier JSON"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"
+        "204":
+          description: "Erreur dans le nom du fichier il n'est pas dedans la BDD"
+  /addMoney:
+    post:
+      tags:
+      - "PorteFeuille"
+      summary: "Permet d'ajouter de l'argent dans son portemonnaie"
+      description: "L'utilisateur peut ajouter de l'argent dans son portemonnaie via cet route"
+      operationId: "addMoney"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "Username de l'utilisateur"
+        required: true
+        type: "string"
+      - name: "money"
+        in: "formData"
+        description: "Argent à rajouter"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Argent crédité sur votre portemonnaie"
+        "204":
+          description: "Vous n'êtes pas connecté ou vous n'avez pas de portefeuille"
+  /withdrawalMoney:
+    post:
+      tags:
+      - "PorteFeuille"
+      summary: "Permet d'acheter ou vendre des actions"
+      description: "Permet à l'utilisateur d'acheter ou vendre des actions en fonction du prix"
+      operationId: "withdrawalMoney"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "username"
+        in: "formData"
+        description: "Username de l'utilisateur"
+        required: true
+        type: "string"
+      - name: "money"
+        in: "formData"
+        description: "Argent à acheter"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Votre portemonnaie a été débité"
+        "202":
+          description: "Vous n'avez pas assez de fond"
+        "204":
+          description: "Vous n'êtes pas connecté ou vous n'avez pas de portefeuille"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
