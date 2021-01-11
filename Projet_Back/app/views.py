@@ -192,7 +192,7 @@ def addMoney(request):
                 money = form_data["money"]
 
                 wallet = PorteFeuille.objects.get(username=username)
-                wallet.valeur = money
+                wallet.valeur += money
                 wallet.save()
 
                 return JsonResponse({"statut" : "OK", "motif" : "Votre porte-monnaie à été crédité"}, status=200)
